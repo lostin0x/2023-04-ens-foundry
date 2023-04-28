@@ -62,10 +62,16 @@ contract DNSSECImpl is DNSSEC, Owned {
      * @param algo The address of the algorithm contract.
      */
     function setAlgorithm(uint8 id, Algorithm algo) public owner_only {
+        // TODO
         algorithms[id] = algo;
         emit AlgorithmUpdated(id, address(algo));
     }
-
+    function setAlgorithm(uint8 id, Algorithm newAlgo, Algorithm oldAlgo) public owner_only {
+        require(newAlgo != oldAlgo);
+        require(algorithms[id] == oldAlgo);
+        algorithms[id] = newAlgo;
+        emit AlgorithmUpdated(id, address(newAlgo));
+    }
     /**
      * @dev Sets the contract address for a digest verification algorithm.
      *      Callable only by the owner.
@@ -73,8 +79,16 @@ contract DNSSECImpl is DNSSEC, Owned {
      * @param digest The address of the digest contract.
      */
     function setDigest(uint8 id, Digest digest) public owner_only {
+        // TODO
         digests[id] = digest;
         emit DigestUpdated(id, address(digest));
+    }
+
+    function setDigest(uint8 id, Digest newDigest, Digest oldDigest) public owner_only {
+        require(newDigest != oldDigest);
+        require(digests[id] == oldDigest);
+        digests[id] = newDigest;
+        emit DigestUpdated(id, address(newDigest));
     }
 
     /**

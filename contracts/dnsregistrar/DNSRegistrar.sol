@@ -147,11 +147,11 @@ contract DNSRegistrar is IDNSRegistrar, IERC165 {
 
         // Make sure the parent name is enabled
         parentNode = enableNode(parentName);
-
         bytes32 node = keccak256(abi.encodePacked(parentNode, labelHash));
         if (!RRUtils.serialNumberGte(inception, inceptions[node])) {
-            revert StaleProof();
+            revert StaleProof(); // TODO 
         }
+        // TODO 
         inceptions[node] = inception;
 
         bool found;

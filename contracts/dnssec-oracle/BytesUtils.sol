@@ -180,6 +180,7 @@ library BytesUtils {
         bytes memory self,
         uint256 idx
     ) internal pure returns (uint8 ret) {
+        // TODO 
         return uint8(self[idx]);
     }
 
